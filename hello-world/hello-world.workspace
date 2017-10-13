@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="hello-world" Database="">
+  <Project Name="hello-world" Path="hello-world/hello-world.project" Active="No"/>
+  <Project Name="moreorless" Path="moreorless/moreorless.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="hello-world" ConfigName="Debug"/>
+      <Project Name="moreorless" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="no">
+      <Environment/>
+      <Project Name="hello-world" ConfigName="Release"/>
+      <Project Name="moreorless" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
