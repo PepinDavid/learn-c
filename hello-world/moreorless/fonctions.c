@@ -197,7 +197,7 @@ void AnswersWithStruct(Game* g){
 }
 
 int YouWinWithStruct(Game* g){
-	printf("Félicitations !!!\n");
+	printf("Félicitations !!!\n"); 
 	if(g->p->luck == 10)
 		printf("Champion : %d", g->p->luck);
 	else if(g->p->luck < 10 && g->p->luck > 5)
@@ -229,4 +229,22 @@ void ReplayWithStruct(Game* g){
 				break;
 		}
 	}while(answer < 1 || answer > 2);
+}
+
+void InitPlayer(Player* p){
+    printf("Quel est votre nom ?\n");
+    scanf("%s", (&p->name));
+    printf("Quel est votre prénom ?\n");
+    scanf("%s", (&p->surname));
+    printf("Bonjour, %s %s\n", p->name, p->surname);
+    
+    p->luck = 10;
+    p->answer = 0;
+}
+
+void InitGame(Game* g, Player* p){
+    g->p = p;
+    g->difficulty = 0;
+    g->nbMyst = 0;
+    g->replay = 1;
 }

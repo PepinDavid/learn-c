@@ -9,6 +9,8 @@ typedef struct Game Game;
 typedef struct Player Player;
 
 struct Player{
+    char name[100];
+    char surname[100];
     int answer;
     int luck;
 };
@@ -40,3 +42,7 @@ void AnswersWithStruct(Game* g);
 int YouWinWithStruct(Game* g);
 
 void ReplayWithStruct(Game* g);
+
+void InitPlayer(Player* p);
+
+void InitGame(Game* g, Player* p);
