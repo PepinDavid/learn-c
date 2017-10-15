@@ -5,22 +5,22 @@
 ## Debug
 ProjectName            :=moreorless
 ConfigurationName      :=Debug
-WorkspacePath          := "/home/david/perso/learn-c/hello-world"
-ProjectPath            := "/home/david/perso/learn-c/hello-world/moreorless"
+WorkspacePath          :=/home/david/dev/learn-c/hello-world
+ProjectPath            :=/home/david/dev/learn-c/hello-world/moreorless
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=David
-Date                   :=13/10/17
-CodeLitePath           :="/home/david/.codelite"
-LinkerName             :=g++
-SharedObjectLinkerName :=g++ -shared -fPIC
+User                   :=root
+Date                   :=15/10/17
+CodeLitePath           :=/root/.codelite
+LinkerName             :=/usr/bin/g++
+SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
-PreprocessSuffix       :=.o.i
-DebugSwitch            :=-gstab
+PreprocessSuffix       :=.i
+DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
 OutputSwitch           :=-o 
@@ -31,7 +31,7 @@ OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E 
+PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="moreorless.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
@@ -47,13 +47,13 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := ar rcus
-CXX      := g++
-CC       := gcc
+AR       := /usr/bin/ar rcu
+CXX      := /usr/bin/g++
+CC       := /usr/bin/gcc
 CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := as
+AS       := /usr/bin/as
 
 
 ##
@@ -92,20 +92,20 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/fonctions.c$(ObjectSuffix): fonctions.c $(IntermediateDirectory)/fonctions.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/perso/learn-c/hello-world/moreorless/fonctions.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/moreorless/fonctions.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/fonctions.c$(DependSuffix): fonctions.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) -MF$(IntermediateDirectory)/fonctions.c$(DependSuffix) -MM "fonctions.c"
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) -MF$(IntermediateDirectory)/fonctions.c$(DependSuffix) -MM fonctions.c
 
 $(IntermediateDirectory)/fonctions.c$(PreprocessSuffix): fonctions.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/fonctions.c$(PreprocessSuffix) "fonctions.c"
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/fonctions.c$(PreprocessSuffix) fonctions.c
 
 $(IntermediateDirectory)/main.c$(ObjectSuffix): main.c $(IntermediateDirectory)/main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/perso/learn-c/hello-world/moreorless/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/moreorless/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.c$(DependSuffix): main.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM "main.c"
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM main.c
 
 $(IntermediateDirectory)/main.c$(PreprocessSuffix): main.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.c$(PreprocessSuffix) "main.c"
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.c$(PreprocessSuffix) main.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

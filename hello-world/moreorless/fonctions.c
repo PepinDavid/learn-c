@@ -117,3 +117,116 @@ void loopGame(int *diff, int *nbM, int *ans, int *chance, int *replay){
 			printf("Bye\n");
 	}while(*replay > 0);
 }
+
+
+// with strcuture
+
+void loopGameWithStruct(Game* g){
+	do{
+		ChoiceDifficultyWithStruct(g);
+	
+		AnswersWithStruct(g);
+		
+		(g->p->luck > 0)?YouWinWithStruct(g):printf("Perdu le nombre était : %d\n",g->nbMyst);
+			
+        ReplayWithStruct(g);
+		g->p->luck = 10;
+		
+		printf("\n");
+		if(g->replay == 0)
+			printf("Bye\n");
+	}while(g->replay > 0);
+}
+
+void ChoiceDifficultyWithStruct(Game* g){
+	srand(time(NULL)); 
+
+	char* choiceDifficult = "Choix de la difficulté : \n\t1. facile (0 à 100)\n\t2. moyenne (0 à 1000)\n\t3. Difficile (0 à 10000)\n";
+	
+	printf("%c\n",choiceDifficult[0]);
+	printf("Devinez le nombre mystères !!!\n");
+	printf("%s",choiceDifficult);
+	
+	do{
+		scanf("%d", (&g->difficulty));
+		switch(g->difficulty){
+			case 1:
+				g->nbMyst = (rand() % (MAX_EASY - MIN +1)) + MIN;
+				break;
+			case 2:
+				g->nbMyst = (rand() % (MAX_MEDIUM - MIN +1)) + MIN;
+				break;
+			case 3:
+				g->nbMyst = (rand() % (MAX_HARD - MIN +1)) + MIN;
+				break;
+			default:
+				printf("Le choix %d n'est pas un choix valide\n ", g->difficulty);
+				printf("%s",choiceDifficult);
+				break;
+				
+		}
+	}while(g->difficulty < 1 || g->difficulty > 3);
+	
+	switch(g->difficulty){
+		case 1:
+			printf("Niveau Facile 0 à 100\n");
+			break;
+		case 2:
+			printf("Niveau Moyen 0 à 1000\n");
+			break;
+		case 3:
+			printf("Niveau Difficile 0 à 10000\n");
+			break;
+		default:
+			break;
+			
+	}
+}
+
+void AnswersWithStruct(Game* g){
+	do{
+		printf("Vous avez %d chance. Votre reponse : ", g->p->luck);
+		scanf("%d", (&g->p->answer));
+		
+		if(g->p->answer > g->nbMyst)
+			printf("Plus petit !\n"), g->p->luck--;
+		else if(g->p->answer < g->nbMyst)
+			printf("Plus grand !\n"), g->p->luck--;
+		
+	}while(g->p->answer != g->nbMyst && g->p->luck > 0);
+}
+
+int YouWinWithStruct(Game* g){
+	printf("Félicitations !!!\n");
+	if(g->p->luck == 10)
+		printf("Champion : %d", g->p->luck);
+	else if(g->p->luck < 10 && g->p->luck > 5)
+		printf("Intermediaire : %d", g->p->luck);
+	else if(g->p->luck <= 5 && g->p->luck >= 3)
+		printf("Pas mal : %d", g->p->luck);
+	else
+		printf("Ca, c'est de la chance : %d", g->p->luck);
+		
+	printf("\n");
+	
+	return 1;
+}
+
+void ReplayWithStruct(Game* g){
+	int answer = 1;
+	printf("Rejouer ? \n\t 1.Oui \n\t 2.Non \nReponse : ");
+	scanf("%d", &answer);
+	do{
+		switch(answer){
+			case 1:
+				g->replay = 1;
+				break;
+			case 2:
+				g->replay = 0;
+				break;
+			default:
+				printf("\nChoix en 1 et 2, recommencez \n");
+				break;
+		}
+	}while(answer < 1 || answer > 2);
+}

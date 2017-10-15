@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="hello-world" Database="">
+<CodeLite_Workspace Name="hello-world" Database="" Version="10.0.0">
   <Project Name="hello-world" Path="hello-world/hello-world.project" Active="No"/>
   <Project Name="moreorless" Path="moreorless/moreorless.project" Active="Yes"/>
   <BuildMatrix>
