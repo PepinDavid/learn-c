@@ -3,17 +3,17 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=moreorless
+ProjectName            :=write-in-files
 ConfigurationName      :=Debug
 WorkspacePath          :=/home/david/dev/learn-c/hello-world
-ProjectPath            :=/home/david/dev/learn-c/hello-world/moreorless
+ProjectPath            :=/home/david/dev/learn-c/hello-world/write-in-files
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=root
-Date                   :=20/10/17
+Date                   :=19/10/17
 CodeLitePath           :=/root/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -32,7 +32,7 @@ Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="moreorless.txt"
+ObjectsFileList        :="write-in-files.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) $(IntermediateDirectory)/main.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.c$(ObjectSuffix) 
 
 
 
@@ -91,16 +91,8 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/fonctions.c$(ObjectSuffix): fonctions.c $(IntermediateDirectory)/fonctions.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/moreorless/fonctions.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/fonctions.c$(DependSuffix): fonctions.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/fonctions.c$(ObjectSuffix) -MF$(IntermediateDirectory)/fonctions.c$(DependSuffix) -MM fonctions.c
-
-$(IntermediateDirectory)/fonctions.c$(PreprocessSuffix): fonctions.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/fonctions.c$(PreprocessSuffix) fonctions.c
-
 $(IntermediateDirectory)/main.c$(ObjectSuffix): main.c $(IntermediateDirectory)/main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/moreorless/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/write-in-files/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.c$(DependSuffix): main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM main.c
 

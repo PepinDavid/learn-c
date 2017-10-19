@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="hello-world" Database="" Version="10.0.0">
   <Project Name="hello-world" Path="hello-world/hello-world.project" Active="No"/>
-  <Project Name="moreorless" Path="moreorless/moreorless.project" Active="Yes"/>
+  <Project Name="moreorless" Path="moreorless/moreorless.project" Active="No"/>
+  <Project Name="write-in-files" Path="write-in-files/write-in-files.project" Active="No"/>
+  <Project Name="allocation-dynamic" Path="allocation-dynamic/allocation-dynamic.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="hello-world" ConfigName="Debug"/>
       <Project Name="moreorless" ConfigName="Debug"/>
+      <Project Name="write-in-files" ConfigName="Debug"/>
+      <Project Name="allocation-dynamic" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="no">
+    <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="hello-world" ConfigName="Release"/>
       <Project Name="moreorless" ConfigName="Release"/>
+      <Project Name="write-in-files" ConfigName="Release"/>
+      <Project Name="allocation-dynamic" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
