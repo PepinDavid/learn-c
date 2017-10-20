@@ -92,5 +92,6 @@
   </Settings>
   <VirtualDirectory Name="src">
     <File Name="main.c"/>
+    <File Name="dico.txt"/>
   </VirtualDirectory>
 </CodeLite_Project>
