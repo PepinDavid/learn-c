@@ -4,6 +4,7 @@
   <Project Name="moreorless" Path="moreorless/moreorless.project" Active="No"/>
   <Project Name="write-in-files" Path="write-in-files/write-in-files.project" Active="No"/>
   <Project Name="allocation-dynamic" Path="allocation-dynamic/allocation-dynamic.project" Active="Yes"/>
+  <Project Name="hanged-man" Path="hanged-man/hanged-man.project"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -11,6 +12,7 @@
       <Project Name="moreorless" ConfigName="Debug"/>
       <Project Name="write-in-files" ConfigName="Debug"/>
       <Project Name="allocation-dynamic" ConfigName="Debug"/>
+      <Project Name="hanged-man" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -18,6 +20,7 @@
       <Project Name="moreorless" ConfigName="Release"/>
       <Project Name="write-in-files" ConfigName="Release"/>
       <Project Name="allocation-dynamic" ConfigName="Release"/>
+      <Project Name="hanged-man" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
