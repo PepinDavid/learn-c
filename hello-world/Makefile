@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ write-in-files - Debug ]----------"
-	@cd "write-in-files" && "$(MAKE)" -f  "write-in-files.mk"
+	@echo "----------Building project:[ allocation-dynamic - Debug ]----------"
+	@cd "allocation-dynamic" && "$(MAKE)" -f  "allocation-dynamic.mk"
 clean:
-	@echo "----------Cleaning project:[ write-in-files - Debug ]----------"
-	@cd "write-in-files" && "$(MAKE)" -f  "write-in-files.mk" clean
+	@echo "----------Cleaning project:[ allocation-dynamic - Debug ]----------"
+	@cd "allocation-dynamic" && "$(MAKE)" -f  "allocation-dynamic.mk" clean

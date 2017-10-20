@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const char* PATH = "/home/david/perso/dev/learn-c/hello-world/write-in-files/";
+const char* PATH = "/home/david/dev/learn-c/hello-world/write-in-files/";
 const char* FILE_NAME = "test.txt";
 
 int main(int argc, char **argv)
@@ -19,11 +19,15 @@ int main(int argc, char **argv)
 	int nbChar = 14; //for size of string Hello World!\n 
 	char* fGets[100];
 	int readfString = 0; //for fscanf
-	
-	pathAndFile = malloc(strlen(PATH)+1+4); // make space for new string
+	long positionCursor = 0;
+    
+    
+	pathAndFile = malloc(strlen(PATH)+sizeof(FILE_NAME)); // make space for new string
 	strcpy(pathAndFile, PATH); //copy the path
 	strcat(pathAndFile, FILE_NAME); //add the name file
 	
+    
+    //write in file
 	fichier = fopen(pathAndFile, "r+");
 	
 	if(fichier != NULL){
@@ -54,9 +58,9 @@ int main(int argc, char **argv)
 		printf("Erreur lors de l'ouverture du fichier\n");
 	}
 	
+    //read file
 	fichier = fopen(pathAndFile, "r");
 	if(fichier != NULL){		
-		//lecture du fichier
 		
 		printf("read char in loop times\n");		
 		do{
@@ -88,6 +92,64 @@ int main(int argc, char **argv)
 		printf("Erreur lors de l'ouverture du fichier\n");
 	}
 	
-	
+	//reopen file read/play with cursor
+    fichier = fopen(pathAndFile, "r");
+	if(fichier != NULL){		
+		
+		printf("read first char\n");		
+        readChar = fgetc(fichier); //cursor moving one char
+        (readChar != EOF)? printf("%c\n", readChar) : printf("Error: %d",readChar);
+				
+        //get position cursor
+        positionCursor = ftell(fichier);
+        printf("position cursor: %ld\n", positionCursor);
+		
+        //move forward cursor of five char since position ftell
+        fseek(fichier, 5, positionCursor);
+        readChar = fgetc(fichier); //cursor moving one char
+        (readChar != EOF)? printf("%c\n", readChar) : printf("Error: %d",readChar);
+        
+        
+        //get position cursor
+        positionCursor = ftell(fichier);
+        printf("position cursor: %ld\n", positionCursor);
+        
+        //move backward curose of 3 since position ftell
+        fseek(fichier, -3, positionCursor);
+        readChar = fgetc(fichier); //cursor moving one char
+        (readChar != EOF)? printf("%c\n", readChar) : printf("Error: %d",readChar);
+                
+        //or
+        //move forward cursor of five char since actual position cursor
+        //get position cursor
+        positionCursor = ftell(fichier);
+        printf("position cursor: %ld\n", positionCursor);
+
+        fseek(fichier, 8, SEEK_CUR);
+        readChar = fgetc(fichier); //cursor moving one char
+        (readChar != EOF)? printf("%c\n", readChar) : printf("Error: %d",readChar);
+        
+        //move forward cursor of five char since begin file
+        fseek(fichier, 8, SEEK_SET);
+        readChar = fgetc(fichier); //cursor moving one char
+        (readChar != EOF)? printf("%c\n", readChar) : printf("Error: %d",readChar);
+        
+        //move forward cursor of five char since end file
+        fseek(fichier, -7, SEEK_END);
+        readChar = fgetc(fichier); //cursor moving one char
+        (readChar != EOF)? printf("%c\n", readChar) : printf("Error: %d",readChar);        
+        
+		close = fclose(fichier);
+		
+		(close == 0)?
+			printf("Fichier fermé, return fclose = %d\n", close) : 
+				printf("Erreur lors de la fermeture, return fclose = %d\n", close);
+		
+	}else{
+		printf("Erreur lors de l'ouverture du fichier\n");
+	}
+    
+    
+    free(pathAndFile);
 	return 0;
 }
