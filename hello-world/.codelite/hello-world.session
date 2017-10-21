@@ -4,9 +4,16 @@
   <wxString Value="/home/david/dev/learn-c/hello-world/hello-world.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="/home/david/dev/learn-c/hello-world/allocation-dynamic/main.c" Name="FileName"/>
-      <int Value="71" Name="FirstVisibleLine"/>
-      <int Value="93" Name="CurrentLine"/>
+      <wxString Value="/home/david/dev/learn-c/hello-world/hanged-man/main.c" Name="FileName"/>
+      <int Value="25" Name="FirstVisibleLine"/>
+      <int Value="51" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/david/dev/learn-c/hello-world/write-in-files/main.c" Name="FileName"/>
+      <int Value="92" Name="FirstVisibleLine"/>
+      <int Value="102" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
