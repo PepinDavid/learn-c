@@ -15,8 +15,6 @@ void openFile(char *pathAndFile, int *cpt, char *w){
 	FILE *dico = NULL;
 	int charRead = 0;
     int sizeWord = 1;
-    int posCursor = 0;
-    int ch = 0;
 	//int close = 0;
 	int choosenWord = 0;
 	
@@ -50,19 +48,20 @@ void openFile(char *pathAndFile, int *cpt, char *w){
         //faire un do while pour attraper le nombre de lettre du mot choisi
         do{
             charRead = fgetc(dico);
-            printf("%c",charRead);
 			if(charRead != '\n')
                 sizeWord++;
         }while(charRead != '\n');
         
         //on se remet au debut du mot
         fseek(dico, -sizeWord, SEEK_CUR);
+        printf("%p\n", w);
         //alloc dyn de la taille du mot +1
-        w = malloc(sizeof(char)*sizeWord+1);
+        w = realloc(w, sizeof(char)*sizeWord+1);
 		fgets(w, sizeWord, dico);
         //ajout du caractere de fin de mot
         w[strlen(w)] = '\0';
-
+        printf("%s\n", w);
+        printf("%p\n", w);
 		fclose(dico);
 	}else{
 		printf("Error lors de ouverture du Fichier %s \n", pathAndFile);
@@ -72,8 +71,9 @@ void openFile(char *pathAndFile, int *cpt, char *w){
 
 int main(int argc, char **argv)
 {
-	char *pathAndFile = NULL, *secretWord = NULL;
-	int cpt = 0;
+	char *pathAndFile = NULL, *secretWord = NULL, *testWordPtr = NULL;
+    char answer[50];
+	int cpt = 0, i = 0;
 	
 	pathAndFile = malloc(strlen(PATH)+sizeof(FILE_NAME)); // make space for new string
 	
@@ -85,10 +85,20 @@ int main(int argc, char **argv)
 	strcat(pathAndFile, FILE_NAME); //add the name file
 	
 	printf("path file : %s\n", pathAndFile);
-	
+	secretWord = malloc(sizeof(char));
 	openFile(pathAndFile, &cpt, secretWord);
 	
-	//printf("%s\n", secretWord);
+    printf("test word : ");
+    scanf("%s",&answer);
+    
+    testWordPtr = malloc(sizeof(char) * (strlen(answer)+1));
+    for(; i < strlen(answer); i++){
+        testWordPtr[i] = answer[i];
+    }
+    testWordPtr[strlen(testWordPtr) ] = '\0';
+    
+    printf("%d\n",(*testWordPtr == *secretWord));
+    
 	free(pathAndFile);
 	pathAndFile = NULL;
 	

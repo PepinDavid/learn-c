@@ -2,22 +2,7 @@
 <Session Name="/home/david/dev/learn-c/hello-world/hello-world.workspace">
   <int Value="0" Name="m_selectedTab"/>
   <wxString Value="/home/david/dev/learn-c/hello-world/hello-world.workspace" Name="m_workspaceName"/>
-  <TabInfoArray Name="TabInfoArray">
-    <TabInfo>
-      <wxString Value="/home/david/dev/learn-c/hello-world/hanged-man/main.c" Name="FileName"/>
-      <int Value="25" Name="FirstVisibleLine"/>
-      <int Value="51" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/david/dev/learn-c/hello-world/write-in-files/main.c" Name="FileName"/>
-      <int Value="92" Name="FirstVisibleLine"/>
-      <int Value="102" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-  </TabInfoArray>
+  <TabInfoArray Name="TabInfoArray"/>
   <SerializedObject Name="m_breakpoints">
     <long Value="0" Name="Count"/>
   </SerializedObject>
