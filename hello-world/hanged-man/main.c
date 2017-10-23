@@ -21,6 +21,13 @@ int nomberRand(int nombreMax){
     return (rand() % nombreMax);
 }
 
+void pointerFall(char *c){
+	if(c == NULL){
+		printf("Error malloc %s\n", c);
+		exit(0);
+	}
+}
+
 //read character answer
 char readChar(){
 	char letter = 0;
@@ -123,44 +130,54 @@ int main(int argc, char **argv)
 		 *secretWord = NULL, 
 		 *wordHide = NULL,
 		 answer = 0;
-	int findLetter = 0, win = 10;
+	int findLetter = 0, win = 10, replay = 0;
 	
-	pathAndFile = malloc(strlen(PATH)+sizeof(FILE_NAME)); // make space for new string
-	secretWord = malloc(sizeof(char));
-	wordHide = malloc(sizeof(char));
 	
-	if(pathAndFile == NULL){
-		printf("Error malloc pathAndFile\n");
-		exit(0);
-	}
-	strcpy(pathAndFile, PATH); //copy the path
-	strcat(pathAndFile, FILE_NAME); //add the name file
-	
-	printf("path file : %s\n", pathAndFile);
-	
-	openFile(pathAndFile, secretWord);
-	free(pathAndFile);
-	pathAndFile = NULL;
-	
-	createWordHide(secretWord, wordHide);
-	do{
-		printf("Il vous %d coups\n", win);
-		printf("%s\n", wordHide);
-		printf("Taper une lettre : \n");
-		answer = readChar();
-		findLetter = compareWord(secretWord, wordHide, answer);
-		if(findLetter == 0){
-			win--;
-			printf("Mauvaise réponse !\n");
-		}
-	}while(strcmp(secretWord, wordHide) && win > 0);   
-	
-	(win > 0)?
-		printf("You Win\n"):
-		printf("You Lose\n");;
-	
-	free(secretWord);
-	free(wordHide);
+	do{		
+		pathAndFile = malloc(strlen(PATH)+sizeof(FILE_NAME)); // make space for new string
+		secretWord = malloc(sizeof(char));
+		wordHide = malloc(sizeof(char));
+		pointerFall(pathAndFile);
+		pointerFall(secretWord);
+		pointerFall(wordHide);
+		strcpy(pathAndFile, PATH); //copy the path
+		strcat(pathAndFile, FILE_NAME); //add the name file
+		
+		printf("path file : %s\n", pathAndFile);
+		
+		openFile(pathAndFile, secretWord);
+		free(pathAndFile);
+		pathAndFile = NULL;
+		
+		createWordHide(secretWord, wordHide);
+		do{
+			printf("Il vous %d coups\n", win);
+			printf("%s\n", wordHide);
+			printf("Taper une lettre : \n");
+			answer = readChar();
+			findLetter = compareWord(secretWord, wordHide, answer);
+			if(findLetter == 0){
+				win--;
+				printf("Mauvaise réponse !\n");
+			}
+		}while(strcmp(secretWord, wordHide) && win > 0);   
+		
+		(win > 0)?
+			printf("You Win\n"):
+			printf("You Lose\n");;
+		
+		free(secretWord);
+		free(wordHide);
+		secretWord = NULL;
+		wordHide = NULL;
+
+		do{
+			printf("Rejouez ?\n\t1 - Oui\n\t0 - Non\n");
+			scanf("%d", &replay);		
+			if(replay < 0 || replay > 1)
+				printf("La réponse %d n'est pas accepter\n", replay);
+		}while(replay < 0 || replay > 1);
+	}while(replay == 1);
 	
 	return 0;
 }
