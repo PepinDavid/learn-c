@@ -187,7 +187,7 @@ void AnswersWithStruct(Game* g){
 	do{
 		printf("Vous avez %d chance. Votre reponse : ", g->p->luck);
 		scanf("%d", (&g->p->answer));
-		
+		while(getchar() != '\n');
 		if(g->p->answer > g->nbMyst)
 			printf("Plus petit !\n"), g->p->luck--;
 		else if(g->p->answer < g->nbMyst)
