@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 		
 		(win > 0)?
 			printf("You Win\n"):
-			printf("You Lose\n");;
+			printf("You Lose, le mot était : %s\n", secretWord);
 		
 		free(secretWord);
 		free(wordHide);
@@ -179,5 +179,6 @@ int main(int argc, char **argv)
 		}while(replay < 0 || replay > 1);
 	}while(replay == 1);
 	
+	printf("Bye\n");
 	return 0;
 }
