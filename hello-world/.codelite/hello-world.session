@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Session Name="/home/david/dev/learn-c/hello-world/hello-world.workspace">
+<Session Name="/home/david/perso/dev/learn-c/hello-world/hello-world.workspace">
   <int Value="0" Name="m_selectedTab"/>
-  <wxString Value="/home/david/dev/learn-c/hello-world/hello-world.workspace" Name="m_workspaceName"/>
-  <TabInfoArray Name="TabInfoArray">
-    <TabInfo>
-      <wxString Value="/home/david/dev/learn-c/hello-world/allocation-dynamic/main.c" Name="FileName"/>
-      <int Value="71" Name="FirstVisibleLine"/>
-      <int Value="93" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-  </TabInfoArray>
+  <wxString Value="/home/david/perso/dev/learn-c/hello-world/hello-world.workspace" Name="m_workspaceName"/>
+  <TabInfoArray Name="TabInfoArray"/>
   <SerializedObject Name="m_breakpoints">
     <long Value="0" Name="Count"/>
   </SerializedObject>
