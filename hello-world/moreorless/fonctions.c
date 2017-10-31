@@ -167,14 +167,13 @@ void ChoiceDifficultyWithStruct(Game* g){
 
 	char* choiceDifficult = "Choix de la difficulté : \n\t1. facile (0 à 100)\n\t2. moyenne (0 à 1000)\n\t3. Difficile (0 à 10000)\n";
 	
-	printf("%c\n",choiceDifficult[0]);
 	printf("Devinez le nombre mystères !!!\n");
 	printf("%s",choiceDifficult);
 	
 	do{
-		Read((void *)&g->numChar, 4);
+		Read(&(*g).numChar, 4);
         g->difficulty = strtol(g->numChar, NULL, 10);
-        //while(getchar() != '\n');
+        
 		switch(g->difficulty){
 			case 1:
 				g->nbMyst = (rand() % (MAX_EASY - MIN +1)) + MIN;
@@ -212,7 +211,7 @@ void ChoiceDifficultyWithStruct(Game* g){
 void AnswersWithStruct(Game* g){
 	do{
 		printf("Vous avez %d chance. Votre reponse : ", g->p->luck);
-		Read((void *)&g->p->answerChar, 64);
+		Read(&(*g).p->answerChar, 64); //or Read((void *)&g.p->answerChar, 64);
         g->p->answer = strtol(g->p->answerChar, NULL, 10);
 		if(g->p->answer > g->nbMyst)
 			printf("Plus petit !\n"), g->p->luck--;
