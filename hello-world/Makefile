@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ SDL-img - Debug ]----------"
-	@cd "SDL-img" && "$(MAKE)" -f  "SDL-img.mk"
+	@echo "----------Building project:[ SDL-events - Debug ]----------"
+	@cd "SDL-events" && "$(MAKE)" -f  "SDL-events.mk"
 clean:
-	@echo "----------Cleaning project:[ SDL-img - Debug ]----------"
-	@cd "SDL-img" && "$(MAKE)" -f  "SDL-img.mk" clean
+	@echo "----------Cleaning project:[ SDL-events - Debug ]----------"
+	@cd "SDL-events" && "$(MAKE)" -f  "SDL-events.mk" clean

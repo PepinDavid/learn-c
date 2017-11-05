@@ -6,7 +6,8 @@
   <Project Name="allocation-dynamic" Path="allocation-dynamic/allocation-dynamic.project" Active="No"/>
   <Project Name="hanged-man" Path="hanged-man/hanged-man.project" Active="No"/>
   <Project Name="SDL" Path="SDL/SDL.project" Active="No"/>
-  <Project Name="SDL-img" Path="SDL-img/SDL-img.project" Active="Yes"/>
+  <Project Name="SDL-img" Path="SDL-img/SDL-img.project" Active="No"/>
+  <Project Name="SDL-events" Path="SDL-events/SDL-events.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -17,6 +18,7 @@
       <Project Name="hanged-man" ConfigName="Debug"/>
       <Project Name="SDL" ConfigName="Debug"/>
       <Project Name="SDL-img" ConfigName="Debug"/>
+      <Project Name="SDL-events" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -27,6 +29,7 @@
       <Project Name="hanged-man" ConfigName="Release"/>
       <Project Name="SDL" ConfigName="Release"/>
       <Project Name="SDL-img" ConfigName="Release"/>
+      <Project Name="SDL-events" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
