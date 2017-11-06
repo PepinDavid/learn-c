@@ -2,20 +2,29 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
- 
+
+typedef struct SDLImage SDLImage;
+
+struct SDLImage{
+	SDL_Surface *img;
+	SDL_Rect posImg;
+};
+
 void getErrorLoadSurface(SDL_Surface *e);
 void getErrorLoadImg(SDL_Surface *e);
 
-void checkEvent(SDL_Surface *win, SDL_Surface *img, SDL_Rect *posImg, SDL_Event *event);
+void checkEvent(SDL_Surface *win, SDLImage *pic, SDL_Event *event);
 void redrawScreen(SDL_Surface *win, SDL_Surface *img, SDL_Rect *posImg);
-void move(SDL_Event *event, SDL_Rect *posImg);
+void moveKeys(SDL_Event *event, SDL_Rect *posImg);
+void moveMouseButton(SDL_Event *event, SDL_Rect *posImg, int *activeMouseMotion);
 
 int main(int argc, char **argv)
 {
-	SDL_Surface *window = NULL, *img = NULL;
-    SDL_Rect posImg;
+	SDL_Surface *window = NULL;
+	SDLImage picture;
     SDL_Event event;
     
+	picture.img = NULL;
     
     SDL_Init(SDL_INIT_VIDEO);
     SDL_WM_SetCaption("Provide events with SDL", NULL);
@@ -24,16 +33,16 @@ int main(int argc, char **argv)
     window = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
     getErrorLoadSurface(window);
     
-    img = IMG_Load("/home/david/Téléchargements/pack_images_sdz/zozor.bmp");
-    getErrorLoadImg(img);
-    SDL_SetColorKey(img, SDL_SRCCOLORKEY, SDL_MapRGB(img->format, 0, 0, 255));
-    posImg.y = window->h / 2 - img->h / 2;
-    posImg.x = window->w / 2 - img->w / 2;
+    picture.img = IMG_Load("/home/david/Téléchargements/pack_images_sdz/zozor.bmp");
+    getErrorLoadImg(picture.img);
+    SDL_SetColorKey(picture.img, SDL_SRCCOLORKEY, SDL_MapRGB(picture.img->format, 0, 0, 255));
+    picture.posImg.y = window->h / 2 - picture.img->h / 2;
+    picture.posImg.x = window->w / 2 - picture.img->w / 2;
     
     
-    checkEvent(window, img, &posImg, &event);
+    checkEvent(window, &picture, &event);
     
-    SDL_FreeSurface(img);
+    SDL_FreeSurface(picture.img);
     SDL_Quit();
     
 	return 0;
@@ -46,14 +55,14 @@ void redrawScreen(SDL_Surface *win, SDL_Surface *img, SDL_Rect *posImg){
     SDL_Flip(win); 
 }
 
-void checkEvent(SDL_Surface *win, SDL_Surface *img, SDL_Rect *posImg, SDL_Event *event)
-{
+void checkEvent(SDL_Surface *win, SDLImage *pic, SDL_Event *event){
     int loopScene = 1;
+	int activeMouseMotion = 1;
     SDL_EnableKeyRepeat(10, 10); 
     
     while (loopScene)
     {
-        redrawScreen(win, img, posImg);        
+        redrawScreen(win, pic->img, &(pic->posImg));
         
         SDL_WaitEvent(event);
         
@@ -63,14 +72,40 @@ void checkEvent(SDL_Surface *win, SDL_Surface *img, SDL_Rect *posImg, SDL_Event 
                 loopScene = 0;
                 break;
             case SDL_KEYDOWN:
-                move(event, posImg);
+                moveKeys(event, &(pic->posImg));
                 break;
+			case SDL_MOUSEBUTTONUP:
+				moveMouseButton(event, &(pic->posImg), &activeMouseMotion);
+				break;
+			case SDL_MOUSEMOTION:
+				printf("move mouse\n %d\n", activeMouseMotion);
+				if(activeMouseMotion == 1){
+					pic->posImg.x = event->button.x - pic->posImg.w / 2;
+					pic->posImg.y = event->button.y - pic->posImg.h / 2;
+				}
+				break;
         }
     }
 }
 
+void moveMouseButton(SDL_Event *event, SDL_Rect *posImg, int *activeMouseMotion){
+	switch(event->button.button){
+		case SDL_BUTTON_LEFT:
+			*activeMouseMotion = 1;
+			SDL_ShowCursor(SDL_DISABLE);
+			posImg->x = event->button.x - posImg->w / 2;
+			posImg->y = event->button.y - posImg->h / 2;
+			printf("click button mouse left\n %d\n", *activeMouseMotion);
+			break;
+		case SDL_BUTTON_RIGHT:
+			*activeMouseMotion = 0;
+			SDL_ShowCursor(SDL_ENABLE);
+			printf("click button mouse right\n %d\n", *activeMouseMotion);
+			break;
+	}
+}
 
-void move(SDL_Event *event, SDL_Rect *posImg){
+void moveKeys(SDL_Event *event, SDL_Rect *posImg){
     switch(event->key.keysym.sym)
     {
         case SDLK_UP:
@@ -89,6 +124,13 @@ void move(SDL_Event *event, SDL_Rect *posImg){
             posImg->x -= 5;
             printf("left\n");
             break;
+		case SDLK_r:
+			SDL_WarpMouse(posImg->x, posImg->y);
+			break;
+		case SDLK_UNKNOWN:
+			break;
+		default:
+			break;
     }
 }
 
