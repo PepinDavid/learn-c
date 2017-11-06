@@ -22,7 +22,7 @@ int nomberRand(int nombreMax){
     return (rand() % nombreMax);
 }
 
-void pointerFall(char *c){
+void pointerFail(char *c){
 	if(c == NULL){
 		printf("Error malloc %s\n", c);
 		exit(0);
@@ -138,9 +138,9 @@ int main(int argc, char **argv)
 		pathAndFile = malloc(strlen(PATH)+sizeof(FILE_NAME)); // make space for new string
 		secretWord = malloc(sizeof(char));
 		wordHide = malloc(sizeof(char));
-		pointerFall(pathAndFile);
-		pointerFall(secretWord);
-		pointerFall(wordHide);
+		pointerFail(pathAndFile);
+		pointerFail(secretWord);
+		pointerFail(wordHide);
 		strcpy(pathAndFile, PATH); //copy the path
 		strcat(pathAndFile, FILE_NAME); //add the name file
 		

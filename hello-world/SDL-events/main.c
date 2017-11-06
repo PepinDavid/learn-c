@@ -38,11 +38,11 @@ int main(int argc, char **argv)
     SDL_SetColorKey(picture.img, SDL_SRCCOLORKEY, SDL_MapRGB(picture.img->format, 0, 0, 255));
     picture.posImg.y = window->h / 2 - picture.img->h / 2;
     picture.posImg.x = window->w / 2 - picture.img->w / 2;
-    
-    
+        
     checkEvent(window, &picture, &event);
     
     SDL_FreeSurface(picture.img);
+	SDL_FreeSurface(window);
     SDL_Quit();
     
 	return 0;
@@ -74,6 +74,12 @@ void checkEvent(SDL_Surface *win, SDLImage *pic, SDL_Event *event){
             case SDL_KEYDOWN:
                 moveKeys(event, &(pic->posImg));
                 break;
+			case SDL_VIDEORESIZE:
+				pic->posImg.x = event->resize.w / 2 - pic->img->w / 2;
+				pic->posImg.y = event->resize.h / 2 - pic->img->h / 2;
+				SDL_FreeSurface(win);
+				win = SDL_SetVideoMode(event->resize.w, event->resize.h, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+				break;
 			case SDL_MOUSEBUTTONUP:
 				moveMouseButton(event, &(pic->posImg), &activeMouseMotion);
 				break;
