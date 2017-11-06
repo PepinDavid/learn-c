@@ -5,18 +5,39 @@ const int MAX_EASY = 100,
 		  MAX_HARD = 10000, 
 		  MIN = 1;
 
+void EraseBuffer(){
+    int c = 0;
+    while(c != '\n' || c != EOF){
+        c = getchar();
+    }
+}
+
+int Read(char *str, int length){
+    char *posCursor = NULL;
+    if(fgets(str, length, stdin) != NULL){
+        posCursor = strchr(str, '\n');
+        (posCursor != NULL)?
+            *posCursor = '\0':
+                EraseBuffer();
+        return 1;
+    }else{
+        EraseBuffer();
+        return 0;
+    }
+}
+
 
 void ChoiceDifficulty(int *diff, int *nbM){
 	srand(time(NULL)); 
 
 	char* choiceDifficult = "Choix de la difficulté : \n\t1. facile (0 à 100)\n\t2. moyenne (0 à 1000)\n\t3. Difficile (0 à 10000)\n";
-	
-	printf("%c\n",choiceDifficult[0]);
+	char choix[5] = {0};
 	printf("Devinez le nombre mystères !!!\n");
 	printf("%s",choiceDifficult);
 	
 	do{
-		scanf("%d", diff);
+		Read(choix, 5);
+        *diff = atoi(choix);
 		
 		switch(*diff){
 			case 1:
@@ -53,10 +74,11 @@ void ChoiceDifficulty(int *diff, int *nbM){
 }
 
 void Answers(int *ans,const int *nbM, int *chance){
+    char a[7] = {0};
 	do{
 		printf("Vous avez %d chance. Votre reponse : ", *chance);
-		scanf("%d", ans);
-		
+		Read(a, 7);
+		*ans = atoi(a);
 		if(*ans > *nbM)
 			printf("Plus petit !\n"), (*chance)--;
 		else if(*ans < *nbM)
@@ -83,8 +105,10 @@ int YouWin(int *chance){
 
 void Replay(int *replay){
 	int answer = 1;
+    char a[3] = {0};
 	printf("Rejouer ? \n\t 1.Oui \n\t 2.Non \nReponse : ");
-	scanf("%d", &answer);
+	Read(a, 3);
+    answer = atoi(a);
 	do{
 		switch(answer){
 			case 1:
@@ -143,12 +167,13 @@ void ChoiceDifficultyWithStruct(Game* g){
 
 	char* choiceDifficult = "Choix de la difficulté : \n\t1. facile (0 à 100)\n\t2. moyenne (0 à 1000)\n\t3. Difficile (0 à 10000)\n";
 	
-	printf("%c\n",choiceDifficult[0]);
 	printf("Devinez le nombre mystères !!!\n");
 	printf("%s",choiceDifficult);
 	
 	do{
-		scanf("%d", (&g->difficulty));
+		Read(&(*g).numChar, 4);
+        g->difficulty = strtol(g->numChar, NULL, 10);
+        
 		switch(g->difficulty){
 			case 1:
 				g->nbMyst = (rand() % (MAX_EASY - MIN +1)) + MIN;
@@ -186,8 +211,8 @@ void ChoiceDifficultyWithStruct(Game* g){
 void AnswersWithStruct(Game* g){
 	do{
 		printf("Vous avez %d chance. Votre reponse : ", g->p->luck);
-		scanf("%d", (&g->p->answer));
-		
+		Read(&(*g).p->answerChar, 64); //or Read((void *)&g.p->answerChar, 64);
+        g->p->answer = strtol(g->p->answerChar, NULL, 10);
 		if(g->p->answer > g->nbMyst)
 			printf("Plus petit !\n"), g->p->luck--;
 		else if(g->p->answer < g->nbMyst)
@@ -214,8 +239,10 @@ int YouWinWithStruct(Game* g){
 
 void ReplayWithStruct(Game* g){
 	int answer = 1;
+    char answerChar[3] = {0};
 	printf("Rejouer ? \n\t 1.Oui \n\t 2.Non \nReponse : ");
-	scanf("%d", &answer);
+	Read(answerChar, 3);
+    answer  = strtol(answerChar, NULL, 10);
 	do{
 		switch(answer){
 			case 1:
@@ -233,9 +260,9 @@ void ReplayWithStruct(Game* g){
 
 void InitPlayer(Player* p){
     printf("Quel est votre nom ?\n");
-    scanf("%s", (&p->name));
+    Read((void *)(&p->name), 100);
     printf("Quel est votre prénom ?\n");
-    scanf("%s", (&p->surname));
+    Read((void *)(&p->surname), 100);
     printf("Bonjour, %s %s\n", p->name, p->surname);
     
     p->luck = 10;

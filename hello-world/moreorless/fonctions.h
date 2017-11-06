@@ -4,13 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <string.h>
 typedef struct Game Game;
 typedef struct Player Player;
 
 struct Player{
     char name[100];
     char surname[100];
+    char answerChar[64];
     int answer;
     int luck;
 };
@@ -20,7 +21,12 @@ struct Game{
     int replay;
     int nbMyst;
     int difficulty;
+    char numChar[4];
 };
+
+void EraseBuffer();
+
+int Read(char *str, int length);
 
 void ChoiceDifficulty(int* diff, int* nbM);
 
