@@ -1,0 +1,1 @@
+./Debug/main.c.o ./Debug/error.c.o ./Debug/event.c.o ./Debug/sdlimage.c.o

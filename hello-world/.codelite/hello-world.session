@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Session Name="/home/david/perso/dev/learn-c/hello-world/hello-world.workspace">
-  <int Value="2" Name="m_selectedTab"/>
+  <int Value="0" Name="m_selectedTab"/>
   <wxString Value="/home/david/perso/dev/learn-c/hello-world/hello-world.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="/home/david/perso/dev/learn-c/hello-world/hanged-man/main.c" Name="FileName"/>
-      <int Value="39" Name="FirstVisibleLine"/>
-      <int Value="50" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/david/perso/dev/learn-c/hello-world/moreorless/fonctions.c" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="0" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/david/perso/dev/learn-c/hello-world/moreorless/fonctions.h" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="20" Name="CurrentLine"/>
+      <wxString Value="/home/david/perso/dev/learn-c/hello-world/SDL-sokoban/main.c" Name="FileName"/>
+      <int Value="12" Name="FirstVisibleLine"/>
+      <int Value="40" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

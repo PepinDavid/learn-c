@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ SDL-events - Debug ]----------"
-	@cd "SDL-events" && "$(MAKE)" -f  "SDL-events.mk"
+	@echo "----------Building project:[ SDL-sokoban - Debug ]----------"
+	@cd "SDL-sokoban" && "$(MAKE)" -f  "SDL-sokoban.mk"
 clean:
-	@echo "----------Cleaning project:[ SDL-events - Debug ]----------"
-	@cd "SDL-events" && "$(MAKE)" -f  "SDL-events.mk" clean
+	@echo "----------Cleaning project:[ SDL-sokoban - Debug ]----------"
+	@cd "SDL-sokoban" && "$(MAKE)" -f  "SDL-sokoban.mk" clean
