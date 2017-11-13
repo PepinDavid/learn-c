@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 	
 	SDL_Surface *window = NULL;
 	SDLImage menu;
+    SDL_Event event;
 	initSDLImage(&menu);
 	
     //SDL_Event event;
@@ -32,13 +33,12 @@ int main(int argc, char **argv)
 	
 	loadImage(&menu, PATH_IMAGE, "menu.jpg");
 	getErrorLoadSurface(menu.picture);
-	SDL_Init(SDL_INIT_VIDEO);
+	
+    SDL_Init(SDL_INIT_VIDEO);
 	
 	SDL_WM_SetIcon(IMG_Load(pathAndFile), NULL);
-	SDL_BlitSurface(menu.picture, NULL, window, &(menu.position));
 	
-	
-	pause();
+	MenuLoop(window, &event, &menu);
 	
 	free(pathAndFile);
 	SDL_FreeSurface(menu.picture);

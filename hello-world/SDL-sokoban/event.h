@@ -7,5 +7,6 @@
 
 
 void pause();
-
+void MenuLoop(SDL_Surface *win, SDL_Event *e, SDLImage *menu);
+void play(SDL_Surface *win, SDL_Event *e);
 #endif

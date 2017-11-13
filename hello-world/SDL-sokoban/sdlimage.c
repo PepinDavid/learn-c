@@ -26,3 +26,10 @@ void loadImage(SDLImage *img, char *constStr, char *str ){
 	strcat(img->path, str); //add the name file
 	img->picture = IMG_Load(img->path);
 }
+
+void loadSprite(Player *p, char *constStr, char *str, int direction ){
+	p->path = malloc(sizeof(char) * strlen(constStr) + (sizeof(char) * strlen(str)) + sizeof(char));
+	strcpy(p->path, constStr); //copy the path
+	strcat(p->path, str); //add the name file
+	p->sprites[direction] = IMG_Load(p->path);
+}
