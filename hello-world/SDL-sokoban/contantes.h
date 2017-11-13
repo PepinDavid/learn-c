@@ -15,7 +15,7 @@ Rôle : défine constantes for all program
 #define HEIGHT_WINDOW    SIZE_BLOCK * NB_BLOCKS_HEIGHT
 #define PATH_IMAGE "/home/david/perso/dev/learn-c/hello-world/SDL-sokoban/images/"
 
-enum {UP, BOTTOM, LEFT, RIGHT};
+enum {UP, DOWN, LEFT, RIGHT};
 enum {EMPTY, WALL, CASE, GOAL, MARIO, CASE_OK};
 
 #endif
