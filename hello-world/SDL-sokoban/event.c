@@ -50,14 +50,27 @@ void MenuLoop(SDL_Surface *win, SDL_Event *e, SDLImage *menu){
 }
 
 void play(SDL_Surface *win, SDL_Event *e){
-    int loop = 1, goalRest = 0, i = 0, j = 0, deplacement = 0;
-    //int map[NB_BLOCKS_WIDTH][NB_BLOCKS_HEIGHT] = {0};
-    //SDL_Surface *wall = NULL, *caisse = NULL, *caisseOK = NULL, *goal = NULL; 
+    int loop = 1, i = 0, deplacement = 0;
+    Map map;
+    SDLIMG wall, caisse, caisseOK, goal; 
     Player perso;
+    //initialisation des images
     initSDLPlayer(&perso);
     
-    perso.position.x = 30;
-    perso.position.y = 30;
+    initSDLIMG(&wall);
+    initSDLIMG(&caisse);
+    initSDLIMG(&caisseOK);
+    initSDLIMG(&goal);
+    
+    //load pictures
+    loadIMG(&wall, PATH_IMAGE, "mur.jpg");
+    getErrorLoadImg(&wall);
+    loadIMG(&caisse, PATH_IMAGE, "caisse.jpg");
+    getErrorLoadImg(&caisse);
+    loadIMG(&caisseOK, PATH_IMAGE, "caisse_ok.jpg");
+    getErrorLoadImg(&caisseOK);
+    loadIMG(&goal, PATH_IMAGE, "objectif.png");
+    getErrorLoadImg(&goal);
     
     loadSprite(&perso, PATH_IMAGE, "mario_haut.gif", UP);
     getErrorLoadImg(&perso.sprites[UP]);
@@ -67,6 +80,9 @@ void play(SDL_Surface *win, SDL_Event *e){
     getErrorLoadImg(&perso.sprites[LEFT]);
     loadSprite(&perso, PATH_IMAGE, "mario_droite.gif", RIGHT);
     getErrorLoadImg(&perso.sprites[RIGHT]);
+    
+    //load map for store each case
+    loadMap(&map, PATH_MAP, "map1.txt");
     
     SDL_EnableKeyRepeat(100, 100);
     while(loop){
