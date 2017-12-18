@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="SDL-sokoban" InternalType="Console">
+<CodeLite_Project Name="SDL-sokoban" InternalType="Console" Version="10.0.0">
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00010001N0005Debug000000000000]]>
@@ -28,6 +28,8 @@
     <File Name="event.c"/>
     <File Name="sdlimage.h"/>
     <File Name="sdlimage.c"/>
+    <File Name="map1.txt"/>
+    <File Name="maps/map1.txt"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
