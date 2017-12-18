@@ -26,15 +26,11 @@ void MenuLoop(SDL_Surface *win, SDL_Event *e, SDLImage *menu){
                 loop = 0;
                 break;
             case SDL_KEYDOWN:
-                printf("keydown\n");
                 switch(e->key.keysym.sym){
-                    case SDLK_1:
+                    case SDLK_KP1:
                         play(win, e);
                         break;
-                    case SDLK_p:
-                        play(win, e);
-                        break;
-                    case SDLK_2:
+                    case SDLK_KP2:
                         //editeur map
                         break;
                     default:
@@ -51,8 +47,8 @@ void MenuLoop(SDL_Surface *win, SDL_Event *e, SDLImage *menu){
 
 void play(SDL_Surface *win, SDL_Event *e){
     int loop = 1, goalRest = 0, i = 0, j = 0, deplacement = 0;
-    //int map[NB_BLOCKS_WIDTH][NB_BLOCKS_HEIGHT] = {0};
-    //SDL_Surface *wall = NULL, *caisse = NULL, *caisseOK = NULL, *goal = NULL; 
+    int map[NB_BLOCKS_WIDTH][NB_BLOCKS_HEIGHT] = {0};
+    SDL_Surface *wall = NULL, *caisse = NULL, *caisseOK = NULL, *goal = NULL; 
     Player perso;
     initSDLPlayer(&perso);
     
@@ -105,15 +101,20 @@ void play(SDL_Surface *win, SDL_Event *e){
                 break;
         }        
         
+		//picture pointer points to the corresponding sprinte pointer
         perso.picture = perso.sprites[deplacement];
-        //refresh window
+        //refresh window with good orientation picture player
         SDL_FillRect(win, NULL, SDL_MapRGB(win->format, 0, 0, 0));
         SDL_BlitSurface(perso.picture, NULL, win, &(perso.position));
+		
         SDL_Flip(win);
     }
     SDL_EnableKeyRepeat(0, 0);
+	//quit game
+	//free
     for(i = 0; i < 4; i++)
         SDL_FreeSurface(perso.sprites[i]);
+	
 }
 
 
