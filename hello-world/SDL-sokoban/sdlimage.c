@@ -45,22 +45,22 @@ void loadMap(Map *m, char *constStr, char *str){
                 printf("%c", fileLine[(i * NB_BLOCKS_WIDTH) + j]);
                 switch(fileLine[(i * NB_BLOCKS_WIDTH) + j]){
                     case '0':
-                        m->map[j][i] = 0;
+                        m->map[j][i] = EMPTY;
                         break;
                     case '1':
-                        m->map[j][i] = 1;
+                        m->map[j][i] = WALL;
                         break;
                     case '2':
-                        m->map[j][i] = 2;
+                        m->map[j][i] = CASE;
                         break;
                     case '3':
-                        m->map[j][i] = 3;
+                        m->map[j][i] = GOAL;
                         break;
                     case '4':
-                        m->map[j][i] = 4;
+                        m->map[j][i] = MARIO;
                         break;
                     case '5':
-                        m->map[j][i] = 5;
+                        m->map[j][i] = CASE_OK;
                         break;
                     default:
                         break;

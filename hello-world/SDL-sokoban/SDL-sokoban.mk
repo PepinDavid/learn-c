@@ -5,21 +5,29 @@
 ## Debug
 ProjectName            :=SDL-sokoban
 ConfigurationName      :=Debug
-WorkspacePath          :=/home/david/dev/learn-c/hello-world
-ProjectPath            :=/home/david/dev/learn-c/hello-world/SDL-sokoban
+WorkspacePath          := "/home/david/perso/dev/learn-c/hello-world"
+ProjectPath            := "/home/david/perso/dev/learn-c/hello-world/SDL-sokoban"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
+<<<<<<< HEAD
 User                   :=root
 Date                   :=10/12/17
 CodeLitePath           :=/root/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
+=======
+User                   :=David
+Date                   :=18/12/17
+CodeLitePath           :="/home/david/.codelite"
+LinkerName             :=gcc
+SharedObjectLinkerName :=gcc -shared -fPIC
+>>>>>>> a5238b8939bd0c88e6920c0ec9e5af6cb9498086
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
-PreprocessSuffix       :=.i
+PreprocessSuffix       :=.o.i
 DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
@@ -31,7 +39,7 @@ OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E
+PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :="SDL-sokoban.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
@@ -47,13 +55,13 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/usr/include
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := /usr/bin/ar rcu
-CXX      := /usr/bin/g++
-CC       := /usr/bin/gcc
+AR       := ar rcus
+CXX      := gcc
+CC       := gcc
 CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
 CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := /usr/bin/as
+AS       := as
 
 
 ##
@@ -92,36 +100,36 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.c$(ObjectSuffix): main.c $(IntermediateDirectory)/main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/SDL-sokoban/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/perso/dev/learn-c/hello-world/SDL-sokoban/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.c$(DependSuffix): main.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM main.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/main.c$(DependSuffix) -MM "main.c"
 
 $(IntermediateDirectory)/main.c$(PreprocessSuffix): main.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.c$(PreprocessSuffix) main.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.c$(PreprocessSuffix) "main.c"
 
 $(IntermediateDirectory)/error.c$(ObjectSuffix): error.c $(IntermediateDirectory)/error.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/SDL-sokoban/error.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/error.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/perso/dev/learn-c/hello-world/SDL-sokoban/error.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/error.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/error.c$(DependSuffix): error.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/error.c$(ObjectSuffix) -MF$(IntermediateDirectory)/error.c$(DependSuffix) -MM error.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/error.c$(ObjectSuffix) -MF$(IntermediateDirectory)/error.c$(DependSuffix) -MM "error.c"
 
 $(IntermediateDirectory)/error.c$(PreprocessSuffix): error.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/error.c$(PreprocessSuffix) error.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/error.c$(PreprocessSuffix) "error.c"
 
 $(IntermediateDirectory)/event.c$(ObjectSuffix): event.c $(IntermediateDirectory)/event.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/SDL-sokoban/event.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/event.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/perso/dev/learn-c/hello-world/SDL-sokoban/event.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/event.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/event.c$(DependSuffix): event.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/event.c$(ObjectSuffix) -MF$(IntermediateDirectory)/event.c$(DependSuffix) -MM event.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/event.c$(ObjectSuffix) -MF$(IntermediateDirectory)/event.c$(DependSuffix) -MM "event.c"
 
 $(IntermediateDirectory)/event.c$(PreprocessSuffix): event.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/event.c$(PreprocessSuffix) event.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/event.c$(PreprocessSuffix) "event.c"
 
 $(IntermediateDirectory)/sdlimage.c$(ObjectSuffix): sdlimage.c $(IntermediateDirectory)/sdlimage.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/SDL-sokoban/sdlimage.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/sdlimage.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/david/perso/dev/learn-c/hello-world/SDL-sokoban/sdlimage.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/sdlimage.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/sdlimage.c$(DependSuffix): sdlimage.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/sdlimage.c$(ObjectSuffix) -MF$(IntermediateDirectory)/sdlimage.c$(DependSuffix) -MM sdlimage.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/sdlimage.c$(ObjectSuffix) -MF$(IntermediateDirectory)/sdlimage.c$(DependSuffix) -MM "sdlimage.c"
 
 $(IntermediateDirectory)/sdlimage.c$(PreprocessSuffix): sdlimage.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/sdlimage.c$(PreprocessSuffix) sdlimage.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/sdlimage.c$(PreprocessSuffix) "sdlimage.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

@@ -1,9 +1,10 @@
-#ifndef DEF_SDLIMAGE
-#define DEF_SDLIMAGE
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include "contantes.h"
+
+#ifndef DEF_SDLIMAGE
+#define DEF_SDLIMAGE
+
 typedef struct SDLImage SDLImage;
 typedef struct Player Player;
 typedef struct SDLIMG SDLIMG;
