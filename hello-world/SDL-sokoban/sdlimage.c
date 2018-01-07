@@ -42,7 +42,6 @@ void loadMap(Map *m, char *constStr, char *str){
 
         for(i = 0; i < NB_BLOCKS_WIDTH; i++){
             for(j = 0; j < NB_BLOCKS_HEIGHT; j++){
-                printf("%c", fileLine[(i * NB_BLOCKS_WIDTH) + j]);
                 switch(fileLine[(i * NB_BLOCKS_WIDTH) + j]){
                     case '0':
                         m->map[j][i] = EMPTY;
