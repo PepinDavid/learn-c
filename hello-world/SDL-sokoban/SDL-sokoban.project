@@ -28,7 +28,6 @@
     <File Name="event.c"/>
     <File Name="sdlimage.h"/>
     <File Name="sdlimage.c"/>
-    <File Name="map1.txt"/>
     <File Name="maps/map1.txt"/>
     <File Name="sdlttf.c"/>
     <File Name="sdlttf.h"/>

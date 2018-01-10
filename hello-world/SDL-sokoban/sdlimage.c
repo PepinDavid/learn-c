@@ -26,7 +26,7 @@ void initSDLIMG(SDLIMG *img){
 	img->path = NULL;
 }
 
-void loadMap(Map *m, char *constStr, char *str){
+void loadMap(Map *m, char *constStr, char *str, int *nbGoal){
     FILE *carte = NULL;
     char fileLine[NB_BLOCKS_HEIGHT * NB_BLOCKS_WIDTH + 1];
     int i = 0, j = 0;
@@ -55,6 +55,7 @@ void loadMap(Map *m, char *constStr, char *str){
                         break;
                     case '3':
                         m->map[j][i] = GOAL;
+                        (*nbGoal)++;
                         break;
                     case '4':
                         m->map[j][i] = MARIO;
@@ -85,6 +86,7 @@ void loadImage(SDLImage *img, char *constStr, char *str ){
 	strcpy(img->path, constStr); //copy the path
 	strcat(img->path, str); //add the name file
 	img->picture = IMG_Load(img->path);
+    getErrorLoadImg(img->picture);
 }
 
 void loadSprite(Player *p, char *constStr, char *str, int direction ){

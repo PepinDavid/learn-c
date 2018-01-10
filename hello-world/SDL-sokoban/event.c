@@ -49,7 +49,7 @@ void MenuLoop(SDL_Surface *win, SDL_Event *e, SDLImage *menu){
 
 void play(SDL_Surface *win, SDL_Event *e){
 
-    int loop = 1, i = 0, j = 0, deplacement = 0, winner = 0;
+    int loop = 1, i = 0, j = 0, deplacement = 0, winner = 0, nbGoal = 0;
     Map carte;
     SDLIMG wall, caisse, caisseOK, goal; 
 	SDL_Rect position;
@@ -57,7 +57,7 @@ void play(SDL_Surface *win, SDL_Event *e){
     Player perso;
     //initialisation player
     initSDLPlayer(&perso);
-    
+    //init image game
     initSDLIMG(&wall);
     initSDLIMG(&caisse);
     initSDLIMG(&caisseOK);
@@ -76,7 +76,7 @@ void play(SDL_Surface *win, SDL_Event *e){
     loadSprite(&perso, PATH_IMAGE, "mario_droite.gif", RIGHT);
     
     //load map for store each case
-    loadMap(&carte, PATH_MAP, "map1.txt");
+    loadMap(&carte, PATH_MAP, "map1.txt", &nbGoal);
 	//get position player on map
 	for (i = 0 ; i < NB_BLOCKS_WIDTH ; i++)
 	{
@@ -85,11 +85,14 @@ void play(SDL_Surface *win, SDL_Event *e){
 			if(carte.map[i][j] == MARIO){
 				perso.position.x = i * SIZE_BLOCK;
 				perso.position.y = j * SIZE_BLOCK;
+                //remove pos init of player
+                carte.map[i][j] = EMPTY;
 				break;
 			}
 		}
 	}
     SDL_EnableKeyRepeat(100, 100);
+    //move player
     while(loop){
         winner = 0;
         SDL_WaitEvent(e);
@@ -126,12 +129,12 @@ void play(SDL_Surface *win, SDL_Event *e){
             default:
                 break;
         }        
-        
 		//picture pointer points to the corresponding sprinte pointer
         perso.picture = perso.sprites[deplacement];
-        //refresh window with good orientation picture player
+        
+        //first: refresh window with good orientation picture player
         SDL_FillRect(win, NULL, SDL_MapRGB(win->format, 0, 0, 0));
-		//add picture after fillRect
+		//second: add picture after fillRect
 		for (i = 0 ; i < NB_BLOCKS_WIDTH ; i++)
         {
 			for (j = 0 ; j < NB_BLOCKS_HEIGHT ; j++)
@@ -146,9 +149,6 @@ void play(SDL_Surface *win, SDL_Event *e){
 					case CASE:
 						SDL_BlitSurface(caisse.picture, NULL, win, &position);
 						break;
-					case MARIO:
-						SDL_BlitSurface(perso.picture, NULL, win, &(perso.position));
-						break;
 					case CASE_OK:
                         winner++;
 						SDL_BlitSurface(caisseOK.picture, NULL, win, &position);
@@ -160,11 +160,13 @@ void play(SDL_Surface *win, SDL_Event *e){
 						break;
 				}
 			}
-		}		
+		}
+        //third: add player on map
+        SDL_BlitSurface(perso.picture, NULL, win, &(perso.position));	
         SDL_Flip(win);
-        if(winner > 2){
+        if(winner == nbGoal){
             loop = 0;
-            //free
+            //free all surface img
             for(i = 0; i < 4; i++)
                 SDL_FreeSurface(perso.sprites[i]);
             SDL_FreeSurface(wall.picture);
@@ -173,16 +175,17 @@ void play(SDL_Surface *win, SDL_Event *e){
             SDL_FreeSurface(goal.picture);
         }
     }
-    
     loop = 1;
     initTTF();
     text = textTTF("You win !!!");
     position.x = WIDTH_WINDOW / 4;
     position.y = HEIGHT_WINDOW / 2;
     while(loop){
-        SDL_BlitSurface(text, NULL, win, &position);
-        SDL_Flip(win);
-        SDL_WaitEvent(e);
+        if(winner == nbGoal){
+            SDL_BlitSurface(text, NULL, win, &position);
+            SDL_Flip(win);
+            SDL_WaitEvent(e);
+        }
         switch(e->type){
             case SDL_QUIT:
                 loop = 0;
@@ -191,9 +194,8 @@ void play(SDL_Surface *win, SDL_Event *e){
                 break;
         }
     }
-    //free
+    //free suface text
     SDL_FreeSurface(text);
-    
     closeTTF();
     SDL_EnableKeyRepeat(0, 0);
 	//quit game
@@ -207,71 +209,99 @@ void movePlayer(Player *perso, Map *map, int *deplacement){
     switch(*deplacement){
         case UP:
             y -= 1;
-            if(map->map[x][y] != WALL && map->map[x][y] != CASE_OK){
-                if(map->map[x][y] == CASE){
+            switch(map->map[x][y]){
+                case CASE:
                     positionFutur = map->map[x][y-1];
                     if(positionFutur != WALL && positionFutur != CASE && positionFutur != CASE_OK){
                         map->map[x][y] = EMPTY;
                         map->map[x][y-1] = (positionFutur == GOAL) ?
-                             CASE_OK : 
-                             CASE;
+                            CASE_OK : 
+                               CASE;                             
                         perso->position.y -= SIZE_BLOCK;
                     }
-                }
-                else
+                    break;
+                case EMPTY:
+                    map->map[x][y] = EMPTY;
                     perso->position.y -= SIZE_BLOCK;
+                    break;
+                case GOAL:
+                    perso->position.y -= SIZE_BLOCK;
+                    break;
+                default:
+                    break;
             }
             break;
         case DOWN:
             y += 1;
-            if(map->map[x][y] != WALL && map->map[x][y] != CASE_OK){
-                if(map->map[x][y] == CASE){
+            switch(map->map[x][y]){
+                case CASE:
                     positionFutur = map->map[x][y+1];
                     if(positionFutur != WALL && positionFutur != CASE && positionFutur != CASE_OK){
                         map->map[x][y] = EMPTY;
                         map->map[x][y+1] = (positionFutur == GOAL) ?
-                             CASE_OK : 
-                             CASE;
-                        
-                        perso->position.y += SIZE_BLOCK;                        
+                            CASE_OK : 
+                                CASE;
+                        perso->position.y += SIZE_BLOCK;
                     }
-                }
-                else
+                    break;
+                case EMPTY:
+                    map->map[x][y] = EMPTY;
                     perso->position.y += SIZE_BLOCK;
+                    break;
+                case GOAL:
+                    perso->position.y += SIZE_BLOCK;
+                    break;
+                default:
+                    break;
             }
             break;
         case LEFT:
             x -= 1;
-            if(map->map[x][y] != WALL && map->map[x][y] != CASE_OK){
-                if(map->map[x][y] == CASE){
-                    positionFutur = map->map[x-1][y];
+            switch(map->map[x][y]){
+                case CASE:
+                     positionFutur = map->map[x-1][y];
                     if(positionFutur != WALL && positionFutur != CASE && positionFutur != CASE_OK){
                         map->map[x][y] = EMPTY;
                         map->map[x-1][y] = (positionFutur == GOAL) ?
-                             CASE_OK : 
-                             CASE;
+                            CASE_OK : 
+                                CASE;
                         perso->position.x -= SIZE_BLOCK;                        
                     }
-                }
-                else
+                    break;
+                case EMPTY:
+                    map->map[x][y] = EMPTY;
                     perso->position.x -= SIZE_BLOCK;
+                    break;
+                case GOAL:
+                    perso->position.x -= SIZE_BLOCK;
+                    break;
+                default:
+                    break;
             }
             break;
         case RIGHT:
             x += 1;
-            if(map->map[x][y] != WALL && map->map[x][y] != CASE_OK){
-                if(map->map[x][y] == CASE){
+            switch(map->map[x][y]){
+                case CASE:
                     positionFutur = map->map[x+1][y];
                     if(positionFutur != WALL && positionFutur != CASE && positionFutur != CASE_OK){
                         map->map[x][y] = EMPTY;
                         map->map[x+1][y] = (positionFutur == GOAL) ?
-                             CASE_OK : 
-                             CASE;
+                            CASE_OK : 
+                                CASE;
                         perso->position.x += SIZE_BLOCK;      
                     }
-                }
-                else
+                    break;
+                case EMPTY:
+                    map->map[x][y] = EMPTY;
                     perso->position.x += SIZE_BLOCK;
+                    break;
+                case GOAL:
+                    perso->position.x += SIZE_BLOCK;
+                    break;
+                default:
+                    break;
+                    
             }
             break;
         default:

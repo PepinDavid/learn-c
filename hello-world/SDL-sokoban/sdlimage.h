@@ -37,7 +37,7 @@ struct Player{
 void initSDLImage(SDLImage *img);
 void initSDLPlayer(Player *player);
 void initSDLIMG(SDLIMG *img);
-void loadMap(Map *m, char *constStr, char *str);
+void loadMap(Map *m, char *constStr, char *str, int *nbGoal);
 void loadIMG(SDLIMG *img, char *constStr, char *str);
 void loadImage(SDLImage *img, char *constStr, char *str);
 void loadSprite(Player *p, char *constStr, char *str, int direction );

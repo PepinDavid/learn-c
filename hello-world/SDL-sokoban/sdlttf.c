@@ -18,6 +18,5 @@ SDL_Surface* textTTF(char* txt){
     TTF_Font *police = NULL;
     police = TTF_OpenFont(PATH_POLICE, 65);
     textIMG = TTF_RenderText_Blended(police, txt, fontColor);
-    printf("in func %p\n", textIMG);
     return textIMG;
 }
