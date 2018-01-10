@@ -1,5 +1,6 @@
 #include "sdlimage.h"
 #include "error.h"
+#include "contantes.h"
 
 void initSDLImage(SDLImage *img){
 	img->picture = NULL;
@@ -95,4 +96,14 @@ void loadSprite(Player *p, char *constStr, char *str, int direction ){
 	strcat(p->path, str); //add the name file
 	p->sprites[direction] = IMG_Load(p->path);
     getErrorLoadImg(p->sprites[direction]);
+}
+
+void drawPlayer(Player *p, SDL_Surface *win){
+    //add size block
+    p->position.x *= SIZE_BLOCK;
+    p->position.y *= SIZE_BLOCK;
+    SDL_BlitSurface(p->picture, NULL, win, &(p->position));	
+        //remove size block for next step
+    p->position.x /= SIZE_BLOCK;
+    p->position.y /= SIZE_BLOCK;
 }

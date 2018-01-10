@@ -83,8 +83,8 @@ void play(SDL_Surface *win, SDL_Event *e){
 		for (j = 0 ; j < NB_BLOCKS_HEIGHT ; j++)
 		{
 			if(carte.map[i][j] == MARIO){
-				perso.position.x = i * SIZE_BLOCK;
-				perso.position.y = j * SIZE_BLOCK;
+				perso.position.x = i;
+				perso.position.y = j;
                 //remove pos init of player
                 carte.map[i][j] = EMPTY;
 				break;
@@ -104,22 +104,22 @@ void play(SDL_Surface *win, SDL_Event *e){
                 switch(e->key.keysym.sym){
                     case SDLK_UP:
 						deplacement = UP;
-						if(perso.position.y - 1 > 0)
+						if(perso.position.y > 0)
 							movePlayer(&perso, &carte, &deplacement);
                         break;
                     case SDLK_DOWN:
 						deplacement = DOWN;
-						if(perso.position.y + SIZE_BLOCK < HEIGHT_WINDOW)
+						if(perso.position.y * SIZE_BLOCK < HEIGHT_WINDOW)
 							movePlayer(&perso, &carte, &deplacement);
                         break;
                     case SDLK_LEFT:
 						deplacement = LEFT;
-						if(perso.position.x - 1 > 0)
+						if(perso.position.x > 0)
 							movePlayer(&perso, &carte, &deplacement);
                         break;
                     case SDLK_RIGHT:
 						deplacement = RIGHT;
-						if(perso.position.x + SIZE_BLOCK < WIDTH_WINDOW)
+						if(perso.position.x * SIZE_BLOCK < WIDTH_WINDOW)
 							movePlayer(&perso, &carte, &deplacement);
                         break;
                     default:
@@ -132,7 +132,7 @@ void play(SDL_Surface *win, SDL_Event *e){
 		//picture pointer points to the corresponding sprinte pointer
         perso.picture = perso.sprites[deplacement];
         
-        //first: refresh window with good orientation picture player
+        //first: refresh window
         SDL_FillRect(win, NULL, SDL_MapRGB(win->format, 0, 0, 0));
 		//second: add picture after fillRect
 		for (i = 0 ; i < NB_BLOCKS_WIDTH ; i++)
@@ -162,7 +162,7 @@ void play(SDL_Surface *win, SDL_Event *e){
 			}
 		}
         //third: add player on map
-        SDL_BlitSurface(perso.picture, NULL, win, &(perso.position));	
+        drawPlayer(&perso, win);
         SDL_Flip(win);
         if(winner == nbGoal){
             loop = 0;
@@ -203,8 +203,8 @@ void play(SDL_Surface *win, SDL_Event *e){
 
 
 void movePlayer(Player *perso, Map *map, int *deplacement){
-    int x = perso->position.x / SIZE_BLOCK;
-    int y = perso->position.y / SIZE_BLOCK;
+    int x = perso->position.x;
+    int y = perso->position.y;
     int positionFutur = 0;
     switch(*deplacement){
         case UP:
@@ -217,15 +217,15 @@ void movePlayer(Player *perso, Map *map, int *deplacement){
                         map->map[x][y-1] = (positionFutur == GOAL) ?
                             CASE_OK : 
                                CASE;                             
-                        perso->position.y -= SIZE_BLOCK;
+                        perso->position.y -= 1;
                     }
                     break;
                 case EMPTY:
                     map->map[x][y] = EMPTY;
-                    perso->position.y -= SIZE_BLOCK;
+                    perso->position.y -= 1;
                     break;
                 case GOAL:
-                    perso->position.y -= SIZE_BLOCK;
+                    perso->position.y -= 1;
                     break;
                 default:
                     break;
@@ -241,15 +241,15 @@ void movePlayer(Player *perso, Map *map, int *deplacement){
                         map->map[x][y+1] = (positionFutur == GOAL) ?
                             CASE_OK : 
                                 CASE;
-                        perso->position.y += SIZE_BLOCK;
+                        perso->position.y += 1;
                     }
                     break;
                 case EMPTY:
                     map->map[x][y] = EMPTY;
-                    perso->position.y += SIZE_BLOCK;
+                    perso->position.y += 1;
                     break;
                 case GOAL:
-                    perso->position.y += SIZE_BLOCK;
+                    perso->position.y += 1;
                     break;
                 default:
                     break;
@@ -265,15 +265,15 @@ void movePlayer(Player *perso, Map *map, int *deplacement){
                         map->map[x-1][y] = (positionFutur == GOAL) ?
                             CASE_OK : 
                                 CASE;
-                        perso->position.x -= SIZE_BLOCK;                        
+                        perso->position.x -= 1;                        
                     }
                     break;
                 case EMPTY:
                     map->map[x][y] = EMPTY;
-                    perso->position.x -= SIZE_BLOCK;
+                    perso->position.x -= 1;
                     break;
                 case GOAL:
-                    perso->position.x -= SIZE_BLOCK;
+                    perso->position.x -= 1;
                     break;
                 default:
                     break;
@@ -289,15 +289,15 @@ void movePlayer(Player *perso, Map *map, int *deplacement){
                         map->map[x+1][y] = (positionFutur == GOAL) ?
                             CASE_OK : 
                                 CASE;
-                        perso->position.x += SIZE_BLOCK;      
+                        perso->position.x += 1;      
                     }
                     break;
                 case EMPTY:
                     map->map[x][y] = EMPTY;
-                    perso->position.x += SIZE_BLOCK;
+                    perso->position.x += 1;
                     break;
                 case GOAL:
-                    perso->position.x += SIZE_BLOCK;
+                    perso->position.x += 1;
                     break;
                 default:
                     break;
