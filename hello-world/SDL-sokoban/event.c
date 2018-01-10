@@ -190,7 +190,6 @@ void play(SDL_Surface *win, SDL_Event *e){
             default:
                 break;
         }
-        test
     }
     //free
     SDL_FreeSurface(text);

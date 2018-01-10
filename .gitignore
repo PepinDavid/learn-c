@@ -2,7 +2,7 @@
 ###############  .gitignore   ##################
 ################################################
 
-.gitignore
+
 tmp
 logs
 
@@ -15,5 +15,5 @@ Makefile
 *.txt
 *.mk
 /*/Debug
-/*/.clang
-/*/.codelite
+/hello-world/.clang
+/hello-world/.codelite
