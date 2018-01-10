@@ -5,11 +5,13 @@
 #include <stdio.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 
 #include "error.h"
 #include "contantes.h"
 #include "event.h"
 #include "sdlimage.h"
+#include "sdlttf.h"
 
 const char *caisse = "caisse.jpg";
 

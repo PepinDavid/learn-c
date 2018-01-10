@@ -1,5 +1,6 @@
 #include "event.h"
 #include "contantes.h"
+#include "sdlttf.h"
 
 void pause(){
     int continuer = 1;
@@ -52,7 +53,7 @@ void play(SDL_Surface *win, SDL_Event *e){
     Map carte;
     SDLIMG wall, caisse, caisseOK, goal; 
 	SDL_Rect position;
-
+    SDL_Surface *text = NULL;
     Player perso;
     //initialisation player
     initSDLPlayer(&perso);
@@ -64,23 +65,15 @@ void play(SDL_Surface *win, SDL_Event *e){
     
     //load pictures
     loadIMG(&wall, PATH_IMAGE, "mur.jpg");
-    getErrorLoadImg(&wall);
     loadIMG(&caisse, PATH_IMAGE, "caisse.jpg");
-    getErrorLoadImg(&caisse);
     loadIMG(&caisseOK, PATH_IMAGE, "caisse_ok.jpg");
-    getErrorLoadImg(&caisseOK);
     loadIMG(&goal, PATH_IMAGE, "objectif.png");
-    getErrorLoadImg(&goal);
     
+    //load sprite player
     loadSprite(&perso, PATH_IMAGE, "mario_haut.gif", UP);
-    getErrorLoadImg(&perso.sprites[UP]);
     loadSprite(&perso, PATH_IMAGE, "mario_bas.gif", DOWN);
-    getErrorLoadImg(&perso.sprites[DOWN]);
     loadSprite(&perso, PATH_IMAGE, "mario_gauche.gif", LEFT);
-
-    getErrorLoadImg(&perso.sprites[LEFT]);
     loadSprite(&perso, PATH_IMAGE, "mario_droite.gif", RIGHT);
-    getErrorLoadImg(&perso.sprites[RIGHT]);
     
     //load map for store each case
     loadMap(&carte, PATH_MAP, "map1.txt");
@@ -170,16 +163,40 @@ void play(SDL_Surface *win, SDL_Event *e){
 		}		
         SDL_Flip(win);
         if(winner > 2){
-            printf("you win %d\n", winner);
             loop = 0;
+            //free
+            for(i = 0; i < 4; i++)
+                SDL_FreeSurface(perso.sprites[i]);
+            SDL_FreeSurface(wall.picture);
+            SDL_FreeSurface(caisse.picture);
+            SDL_FreeSurface(caisseOK.picture);
+            SDL_FreeSurface(goal.picture);
         }
     }
+    
+    loop = 1;
+    initTTF();
+    text = textTTF("You win !!!");
+    position.x = WIDTH_WINDOW / 4;
+    position.y = HEIGHT_WINDOW / 2;
+    while(loop){
+        SDL_BlitSurface(text, NULL, win, &position);
+        SDL_Flip(win);
+        SDL_WaitEvent(e);
+        switch(e->type){
+            case SDL_QUIT:
+                loop = 0;
+                break;
+            default:
+                break;
+        }
+    }
+    //free
+    SDL_FreeSurface(text);
+    
+    closeTTF();
     SDL_EnableKeyRepeat(0, 0);
 	//quit game
-	//free
-    for(i = 0; i < 4; i++)
-        SDL_FreeSurface(perso.sprites[i]);
-	
 }
 
 

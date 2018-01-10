@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=root
-Date                   :=07/01/18
+Date                   :=10/01/18
 CodeLitePath           :=/root/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)SDL $(LibrarySwitch)SDL_image 
-ArLibs                 :=  "SDL" "SDL_image" 
+Libs                   := $(LibrarySwitch)SDL $(LibrarySwitch)SDL_image $(LibrarySwitch)SDL_ttf 
+ArLibs                 :=  "SDL" "SDL_image" "SDL_ttf" 
 LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/usr/include/SDL 
 
 ##
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IntermediateDirectory)/error.c$(ObjectSuffix) $(IntermediateDirectory)/event.c$(ObjectSuffix) $(IntermediateDirectory)/sdlimage.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IntermediateDirectory)/error.c$(ObjectSuffix) $(IntermediateDirectory)/event.c$(ObjectSuffix) $(IntermediateDirectory)/sdlimage.c$(ObjectSuffix) $(IntermediateDirectory)/sdlttf.c$(ObjectSuffix) 
 
 
 
@@ -122,6 +122,14 @@ $(IntermediateDirectory)/sdlimage.c$(DependSuffix): sdlimage.c
 
 $(IntermediateDirectory)/sdlimage.c$(PreprocessSuffix): sdlimage.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/sdlimage.c$(PreprocessSuffix) sdlimage.c
+
+$(IntermediateDirectory)/sdlttf.c$(ObjectSuffix): sdlttf.c $(IntermediateDirectory)/sdlttf.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/david/dev/learn-c/hello-world/SDL-sokoban/sdlttf.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/sdlttf.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/sdlttf.c$(DependSuffix): sdlttf.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/sdlttf.c$(ObjectSuffix) -MF$(IntermediateDirectory)/sdlttf.c$(DependSuffix) -MM sdlttf.c
+
+$(IntermediateDirectory)/sdlttf.c$(PreprocessSuffix): sdlttf.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/sdlttf.c$(PreprocessSuffix) sdlttf.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

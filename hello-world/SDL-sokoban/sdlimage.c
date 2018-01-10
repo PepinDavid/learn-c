@@ -1,4 +1,5 @@
 #include "sdlimage.h"
+#include "error.h"
 
 void initSDLImage(SDLImage *img){
 	img->picture = NULL;
@@ -76,6 +77,7 @@ void loadIMG(SDLIMG *img, char *constStr, char *str ){
 	strcpy(img->path, constStr); //copy the path
 	strcat(img->path, str); //add the name file
 	img->picture = IMG_Load(img->path);
+    getErrorLoadImg(img->picture);
 }
 
 void loadImage(SDLImage *img, char *constStr, char *str ){
@@ -90,4 +92,5 @@ void loadSprite(Player *p, char *constStr, char *str, int direction ){
 	strcpy(p->path, constStr); //copy the path
 	strcat(p->path, str); //add the name file
 	p->sprites[direction] = IMG_Load(p->path);
+    getErrorLoadImg(p->sprites[direction]);
 }
